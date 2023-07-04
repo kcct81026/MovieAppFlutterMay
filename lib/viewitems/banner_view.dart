@@ -1,9 +1,18 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app_may/data/vos/movie_vo.dart';
 import 'package:movie_app_may/resources/colors.dart';
 import 'package:movie_app_may/resources/dimens.dart';
 
+import '../network/api_constants.dart';
+import '../widgets/gradient_view.dart';
+import '../widgets/play_button_view.dart';
+
 class BannerView extends StatelessWidget {
-  const BannerView({Key? key}) : super(key: key);
+  final Function(int) onTapMoive;
+  final MovieVO mMoive;
+
+  BannerView(this.onTapMoive, this.mMoive);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +22,12 @@ class BannerView extends StatelessWidget {
 
           // Banner Image View
           Positioned.fill(
-            child: BannerImageView(),
+            child: GestureDetector(
+              onTap: (){
+                this.onTapMoive(mMoive.id);
+              },
+              child: BannerImageView(mMoive.backDropPath ?? mMoive.posterPath ?? ""),
+            ),
           ),
 
           // Gradient View
@@ -24,7 +38,7 @@ class BannerView extends StatelessWidget {
           // Banner Title View
           Align(
             alignment: Alignment.bottomLeft,
-            child: BannerTitleView(),
+            child: BannerTitleView(mMoive.title ?? mMoive.originalTitle ?? ""),
           ),
 
           // Play Button View
@@ -37,47 +51,15 @@ class BannerView extends StatelessWidget {
   }
 }
 
-class GradientView extends StatelessWidget {
-  const GradientView({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Colors.transparent,
-            PRIMARY_COLOR,
-          ],
-        ),
-      ),
-    );
-  }
-}
 
-class PlayButtonView extends StatelessWidget {
-  const PlayButtonView({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return Icon(
-      Icons.play_circle_fill,
-      size: BANNER_PLAY_BUTTON_SIZE,
-      color: PLAY_BUTTON_COLOR,
-    );
-  }
-}
 
 class BannerTitleView extends StatelessWidget {
-  const BannerTitleView({
-    super.key,
-  });
+
+  final String title;
+
+  BannerTitleView(this.title);
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +70,7 @@ class BannerTitleView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Bright Vachirawit Chivaaree",
+            title,
             style: TextStyle(
               color: Colors.white,
               fontSize: TEXT_HEADING_1X,
@@ -97,7 +79,7 @@ class BannerTitleView extends StatelessWidget {
             maxLines: 2,
           ),
           Text(
-            "My Ecstasy",
+            "",
             style: TextStyle(
               color: Colors.white,
               fontSize: TEXT_HEADING_1X,
@@ -112,15 +94,18 @@ class BannerTitleView extends StatelessWidget {
 }
 
 class BannerImageView extends StatelessWidget {
-  const BannerImageView({
-    super.key,
-  });
+  final String imageURL;
+
+  BannerImageView(this.imageURL);
 
   @override
   Widget build(BuildContext context) {
-    return Image.network(
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_ETdRXFlGKN-JimCydDlOaB5UYHrYatsavA&usqp=CAU",
+    return CachedNetworkImage(
+      imageUrl: "$IMAGE_BASE_URL${imageURL ?? ""}",
+      placeholder: (context, url) => CircularProgressIndicator(),
+      errorWidget: (context, url, error) => Icon(Icons.error),
       fit: BoxFit.cover,
+      //fit: BoxFit.cover,
     );
   }
 }

@@ -10,3 +10,5 @@ com.example.movie_app_may.app-rs-8 /home/dell/FlutterProjects/movie_app_may/buil
 com.example.movie_app_may.app-mergeDebugResources-9 /home/dell/FlutterProjects/movie_app_may/build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir
 com.example.movie_app_may.app-mergeDebugResources-10 /home/dell/FlutterProjects/movie_app_may/build/app/intermediates/incremental/debug/mergeDebugResources/stripped.dir
 com.example.movie_app_may.app-merged_res-11 /home/dell/FlutterProjects/movie_app_may/build/app/intermediates/merged_res/debug
+com.example.movie_app_may.app-packaged_res-12 /home/dell/FlutterProjects/movie_app_may/build/path_provider_android/intermediates/packaged_res/debug
+com.example.movie_app_may.app-packaged_res-13 /home/dell/FlutterProjects/movie_app_may/build/sqflite/intermediates/packaged_res/debug

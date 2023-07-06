@@ -1,4 +1,4 @@
-#Wed May 31 22:02:55 MMT 2023
+#Wed Jul 05 23:00:06 MMT 2023
 base.0=/home/dell/FlutterProjects/movie_app_may/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
